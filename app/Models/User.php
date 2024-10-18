@@ -35,6 +35,11 @@ class User extends Authenticatable
         return $this->hasOne(Rol::class, 'id', 'rol_id');
     }
 
+    public function estatus()
+    {
+        return $this->hasOne(Estatus::class, 'id', 'estatus_id');
+    }
+
 
     /**
      * The attributes that should be hidden for serialization.

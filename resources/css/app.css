@@ -1,3 +1,22 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+td {
+    @apply border-b border-gray-200 px-2 py-2;
+}
+
+table tr:nth-child(even) {
+    @apply bg-white;
+}
+table tr:nth-child(odd) {
+    @apply bg-gray-100;
+}
+
+th {
+    @apply bg-green-50;
+}
+
+.input-cursos{
+    @apply focus:border-blue-900 focus:outline-none focus:ring-1 ring-blue-500 h-10 rounded-md;
+}
