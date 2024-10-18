@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+
 
 class User extends Authenticatable
 {
@@ -17,10 +18,23 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'estatus_id',
+        'rol_id',
+        'alta_usuario',
+        'nombres',
+        'apellido_paterno',
+        'apellido_materno',
+        'matricula',
         'email',
         'password',
+        'url_foto',
     ];
+
+    public function rol()
+    {
+        return $this->hasOne(Rol::class, 'id', 'rol_id');
+    }
+
 
     /**
      * The attributes that should be hidden for serialization.
