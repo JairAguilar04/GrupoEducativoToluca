@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Cursos\Coordinacion\Alumnos;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'welcome');
@@ -12,4 +13,10 @@ Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
 
-require __DIR__.'/auth.php';
+Route::middleware(['auth', 'can:coordinacion-cursos'])->group(function () {
+    Route::get('/alumnos-cursos', Alumnos::class)
+        ->name('alumnos.cursos');
+});
+
+
+require __DIR__ . '/auth.php';
