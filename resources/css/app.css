@@ -3,20 +3,80 @@
 @tailwind utilities;
 
 td {
-    @apply border-b border-gray-200 px-2 py-2;
+    @apply border-b border-moradoClaro-400 px-2 py-2;
 }
 
-table tr:nth-child(even) {
+/* table tr:nth-child(even) {
     @apply bg-white;
 }
 table tr:nth-child(odd) {
-    @apply bg-gray-100;
+    @apply bg-moradoClaro-200;
+} */
+.tr-par-cursos:nth-child(even) {
+    @apply bg-moradoClaro-200;
+}
+.tr-impar-cursos:nth-child(odd) {
+    @apply bg-white;
 }
 
-th {
-    @apply bg-green-50;
-}
+/* th {
+    @apply bg-moradoClaro-700 text-white;
+} */
 
 .input-cursos{
-    @apply focus:border-blue-900 focus:outline-none focus:ring-1 ring-blue-500 h-10 rounded-md;
+    @apply bg-moradoClaro-50 rounded-md h-10 w-full
+    disabled:bg-[#e0dddd] disabled:text-[#777171] disabled:border-[#888181] disabled:cursor-not-allowed;
+}
+
+.input-cursos:focus{
+    @apply focus:border-moradoClaro-500 focus:outline-none focus:ring-1 ring-moradoClaro-500;
+}
+
+.input-file-cursos{
+    @apply file:py-2 file:mr-0 file:px-4 file:rounded-none file:border-y file:border-moradoClaro-500 file:text-sm file:font-semibold file:bg-moradoClaro-500 
+    file:text-white text-transparent text-[0px]  hover:file:bg-moradoClaro-900 focus:outline-none focus:ring-0 
+    appearance-none
+    file:disabled:bg-[#e0dddd] file:disabled:text-[#777171] file:disabled:cursor-not-allowed;
+}
+
+.imput-radio-cursos {
+    @apply text-moradoClaro-500 outline-none rounded-full;
+}
+.imput-radio-cursos:focus {
+    @apply focus:border-moradoClaro-500 focus:outline-none focus:ring-0 focus:ring-moradoClaro-500;
+}
+
+.textarea-cursos{
+    @apply bg-moradoClaro-50 rounded-md w-full
+    focus:border-moradoClaro-900 focus:outline-none focus:ring-1 ring-moradoClaro-700;
+}
+
+.label{
+    @apply block font-medium text-sm mb-2;
+}
+
+.button {
+    @apply transition ease-out delay-150 font-bold py-2 px-4 mx-1 rounded-md h-10 sm:w-auto w-full mt-2
+    hover:-translate-y-1 hover:scale-110 duration-300;
+}
+.button-normal {
+    @apply transition ease-out delay-150
+    hover:-translate-y-1 hover:scale-110 duration-300 disabled:bg-[#e0dddd] disabled:text-[#777171] disabled:border-[#888181] disabled:cursor-not-allowed ;
+}
+.button-normal-color{
+    @apply bg-moradoClaro-500 text-white px-2 rounded-md hover:bg-moradoClaro-800;
+}
+
+.button-titulos-form-cursos{
+    @apply bg-moradoClaro-700 rounded-md w-full text-white p-2 hover:bg-moradoClaro-900;
+}
+
+
+
+.button-primary-cursos {
+    @apply bg-moradoClaro-500 text-white hover:bg-moradoClaro-700 focus:ring-2 focus:outline-none focus:ring-moradoClaro-700;
+}
+
+.button-secondary-cursos {
+    @apply bg-moradoFuerte-900 text-white hover:bg-moradoFuerte-950 hover:rounded-lg focus:ring-2 focus:outline-none focus:ring-moradoFuerte-950;
 }

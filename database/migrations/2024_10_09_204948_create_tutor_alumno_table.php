@@ -17,13 +17,14 @@ return new class extends Migration
                 ->constrained('users', 'id')
                 ->noActionOnUpdate()
                 ->onDelete('cascade');
-            $table->enum('parentesco', ['Padre', 'Madre']);
-            $table->string('nombre_completo', 200);
-            $table->string('domicilio');
-            $table->string('escolaridad', 100);
-            $table->string('ocupacion', 150);
-            $table->string('telefono', 20);
+            $table->enum('parentesco', ['Padre', 'Madre'])->nullable();
+            $table->string('nombre_completo', 200)->nullable();
+            $table->string('domicilio')->nullable();
+            $table->string('escolaridad', 100)->nullable();
+            $table->string('ocupacion', 150)->nullable();
+            $table->string('telefono', 20)->nullable();
 
+            $table->softDeletes();
             $table->timestamps();
         });
     }

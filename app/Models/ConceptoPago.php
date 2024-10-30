@@ -10,4 +10,8 @@ class ConceptoPago extends Model
     use HasFactory;
 
     protected $table = 'conceptos_pagos';
+
+    protected $fillable = [
+        'nombre',
+    ];
 }

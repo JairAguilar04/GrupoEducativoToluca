@@ -25,15 +25,15 @@ new class extends Component {
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
 
-                        <img class="w-10 h-10 p-1 rounded-full ring-2 ring-blue-300 mx-auto mt-4"
-                            src="{{ asset('img/avatar.png') }}" alt="">
+                        <img class="w-10 h-10 p-1 rounded-full bg-moradoClaro-400 mx-auto mt-6"
+                            src="{{ asset(auth()->user()->url_foto) }}" alt="{{ auth()->user()->nombres }}">
 
                         <button
-                            class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                            class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-transparent hover:text-gray-700 focus:outline-none button-normal transition ease-in-out duration-150">
                             {{-- <div x-data="{{ json_encode(['name' => auth()->user()->nombres]) }}" x-text="name"
                                 x-on:profile-updated.window="name = $event.detail.name"></div> --}}
                             <div class="font-medium text-sm text-gray-500">
-                                {{ auth()->user()->nombres . ' ' . auth()->user()->apellido_paterno . ' ' . auth()->user()->apellido_materno }}
+                                {{ auth()->user()->nombres . ' ' . auth()->user()->apellido_paterno }}
                             </div>
 
                             <div class="ms-1">
@@ -96,8 +96,8 @@ new class extends Component {
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
             <div class="px-4">
-                <div class="font-medium text-base text-gray-800" x-data="{{ json_encode(['name' => auth()->user()->nombres, 'rol' => auth()->user()->rol_id]) }}" x-text="name"
-                    x-on:profile-updated.window="name = $event.detail.name"></div>
+                <div class="font-medium text-base text-gray-800">
+                    {{ auth()->user()->nombres . ' ' . auth()->user()->apellido_paterno }}</div>
                 <div class="font-medium text-sm text-gray-500">{{ auth()->user()->email }}</div>
             </div>
 

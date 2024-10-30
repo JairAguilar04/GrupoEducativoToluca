@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>Grupo Educativo Toluca</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -21,22 +21,25 @@
         <div x-data="{ open: true }" class="w-full">
             <!-- Page Heading -->
             @if (isset($header))
-                <header class="bg-white border-b-2 border-gray-400 shadow flex justify-between">
+                <header class="bg-white border-b-2 border-gray-400 shadow flex justify-between sm:h-20">
                     <div class="max-w-7xl py-6 px-4 sm:px-6 lg:px-8 flex sm:flex-row flex-col items-center gap-x-4">
 
                         <div>
-                            <button @click="open = ! open">Show</button>
+                            <button @click="open = ! open" x-text="open ? 'Ocultar' : 'Ver' "
+                                class="button-normal button-normal-color sm:block hidden"></button>
                         </div>
 
                         <!-- Logo -->
-                        <div class="shrink-0 flex">
+                        <div class="shrink-0 sm:flex hidden">
                             <a href="{{ route('alumnos.cursos') }}" wire:navigate>
-                                <x-application-logo class="block h-10 w-auto fill-current text-gray-800" />
+                                <img src="{{ asset('img/logos/logoApp.png') }}" alt="Grupo Educativo Toluca"
+                                    class="w-20">
                             </a>
                         </div>
 
                         {{-- Titulo --}}
                         {{ $header }}
+
                     </div>
 
                     <div>
