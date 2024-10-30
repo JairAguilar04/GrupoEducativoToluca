@@ -26,6 +26,8 @@ return new class extends Migration
             $table->string('colonia', 150);
             $table->string('localidad_municipio', 150);
             $table->string('telefono', 20);
+
+            $table->softDeletes();
             $table->timestamps();
         });
     }

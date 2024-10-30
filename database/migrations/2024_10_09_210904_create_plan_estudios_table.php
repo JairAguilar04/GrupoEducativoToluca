@@ -14,14 +14,18 @@ return new class extends Migration
         Schema::create('plan_estudios', function (Blueprint $table) {
             $table->id();
             $table->foreignUuid('usuario_id')
-                ->constrained('users', 'id')
-                ->noActionOnUpdate()
-                ->onDelete('cascade');
+                ->constrained('users', 'id');
+
+            $table->foreignId('nivel_id')
+                ->constrained('niveles', 'id');
+
             $table->foreignId('modalidad_id')
                 ->constrained('modalidades_estudios', 'id');
-            $table->string('otro')
-                ->nullable()
-                ->comment('campo en caso de que el usuario haya seleccionado otro');
+
+            $table->foreignId('horario_id')
+                ->constrained('horarios', 'id');
+
+            $table->softDeletes();
             $table->timestamps();
         });
     }

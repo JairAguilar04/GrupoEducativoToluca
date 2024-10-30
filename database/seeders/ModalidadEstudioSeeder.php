@@ -13,11 +13,10 @@ class ModalidadEstudioSeeder extends Seeder
      */
     public function run(): void
     {
-        ModalidadEstudio::factory()->count(17)->sequence(
+        ModalidadEstudio::factory()->count(16)->sequence(
             ['nivel_id' => 1, 'nombre' => 'Preparatoria por asignaturas', 'duracion' => '2 años'],
             ['nivel_id' => 1, 'nombre' => 'Programa de emprendimiento', 'duracion' => '2 años'],
             ['nivel_id' => 1, 'nombre' => 'Formación integral', 'duracion' => '2 años'],
-            ['nivel_id' => 1, 'nombre' => 'Otros'],
 
             ['nivel_id' => 2, 'nombre' => 'Derecho', 'duracion' => '3 años'],
             ['nivel_id' => 2, 'nombre' => 'Administración', 'duracion' => '3 años'],

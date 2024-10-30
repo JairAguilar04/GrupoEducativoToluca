@@ -36,16 +36,16 @@ class PagoSeeder extends Seeder
 
             //cursos preparatoria
             ['nivel_id' => 3, 'concepto_id' => 1, 'periodo_id' => 1, 'monto_unitario' => 3000],
-            ['nivel_id' => 3, 'concepto_id' => 3, 'periodo_id' => 3, 'monto_unitario' => 3000],
-            ['nivel_id' => 3, 'concepto_id' => 3, 'periodo_id' => 4, 'monto_unitario' => 3000],
+            ['nivel_id' => 3, 'concepto_id' => 3, 'periodo_id' => 3, 'monto_unitario' => 500.23],
+            ['nivel_id' => 3, 'concepto_id' => 3, 'periodo_id' => 4, 'monto_unitario' => 2000.93],
             ['nivel_id' => 3, 'concepto_id' => 5, 'periodo_id' => 2, 'monto_unitario' => 3000],
             ['nivel_id' => 3, 'concepto_id' => 7, 'periodo_id' => 7, 'monto_unitario' => 3000.233],
 
 
             //cursos licenciatura
             ['nivel_id' => 4, 'concepto_id' => 1, 'periodo_id' => 1, 'monto_unitario' => 100.202050],
-            ['nivel_id' => 4, 'concepto_id' => 3, 'periodo_id' => 3, 'monto_unitario' => 100.2020600],
-            ['nivel_id' => 4, 'concepto_id' => 3, 'periodo_id' => 4, 'monto_unitario' => 100.2020500],
+            ['nivel_id' => 4, 'concepto_id' => 3, 'periodo_id' => 3, 'monto_unitario' => 700.58],
+            ['nivel_id' => 4, 'concepto_id' => 3, 'periodo_id' => 4, 'monto_unitario' => 2800.28],
             ['nivel_id' => 4, 'concepto_id' => 5, 'periodo_id' => 2, 'monto_unitario' => 100.2020500],
             ['nivel_id' => 4, 'concepto_id' => 7, 'periodo_id' => 8, 'monto_unitario' => 100.2020500],
 

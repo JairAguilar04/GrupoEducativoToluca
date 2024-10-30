@@ -20,6 +20,8 @@ return new class extends Migration
             $table->foreignId('pago_id')
                 ->constrained('pagos', 'id');
             $table->string('observaciones')->nullable();
+
+            $table->softDeletes();
             $table->timestamps();
         });
     }

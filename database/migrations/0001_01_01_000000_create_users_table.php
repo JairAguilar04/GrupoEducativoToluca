@@ -23,6 +23,8 @@ return new class extends Migration
             $table->string('password', 100);
             $table->string('url_foto');
             $table->rememberToken();
+
+            $table->softDeletes();
             $table->timestamps();
         });
 
