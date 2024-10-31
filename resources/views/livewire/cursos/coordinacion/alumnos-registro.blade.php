@@ -9,7 +9,7 @@
         <form wire:submit="save">
             @csrf
             <div class="flex flex-col gap-y-8">
-                {{-- Datos personales --}}
+                {{-- Seccion de datos personales --}}
                 <div x-data="{ open: true }">
                     <button type="button" @click="open = ! open" class="button-titulos-form-cursos">
                         Datos personales
@@ -42,7 +42,7 @@
                             </div>
                         </div>
 
-                        {{-- fecha de nacimiento, edad, curp --}}
+                        {{-- fecha de nacimiento, edad, curp  y sexo --}}
                         <div class="flex sm:flex-row flex-col sm:gap-x-5 gap-y-5">
                             <div class="sm:w-1/4 w-full">
                                 <x-input-label for="fechaNacimiento" :value="__('Fecha de nacimiento')" />

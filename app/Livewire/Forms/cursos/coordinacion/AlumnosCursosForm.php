@@ -3,7 +3,6 @@
 namespace App\Livewire\Forms\Cursos\Coordinacion;
 
 use App\Livewire\Cursos\Coordinacion\AlumnosRegistro;
-use App\Models\ConceptoPago;
 use App\Models\CondicionPago;
 use App\Models\DatoPersonal;
 use App\Models\PlanEstudio;
@@ -208,7 +207,7 @@ class AlumnosCursosForm extends Form
             // tabla usuarios
             $usuario = new User();
             $usuario->estatus_id = 1;
-            $usuario->rol_id = 4;
+            $usuario->rol_id = $this->rol;
             $usuario->alta_usuario = Auth::user()->id;
             $usuario->nombres = Str::ucfirst($this->nombre);
             $usuario->apellido_paterno = Str::ucfirst($this->apellidoPaterno);
