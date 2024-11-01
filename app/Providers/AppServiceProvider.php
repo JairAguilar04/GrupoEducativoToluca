@@ -24,5 +24,9 @@ class AppServiceProvider extends ServiceProvider
         Gate::define('coordinacion-cursos', function (User $user) {
             return $user->estatus_id == 1 && $user->rol_id == 9;
         });
+
+        Gate::define('coordinacion-alumnos', function (User $user) {
+            return $user->estatus_id == 1 && $user->rol_id == 4;
+        });
     }
 }

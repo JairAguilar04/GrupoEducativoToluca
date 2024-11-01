@@ -36,10 +36,10 @@ new class extends Component {
                     <x-nav-link :href="route('alumnos.cursos')" :active="request()->routeIs('')" wire:navigate>
                         {{ __('Grupos') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('alumnos.cursos')" :active="request()->routeIs('')" wire:navigate>
-                        {{ __('Grados') }}
+                    <x-nav-link :href="route('cursos.grados')" :active="request()->routeIs('cursos.grados')" wire:navigate>
+                        {{ __('Grados academicos') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('alumnos.cursos')" :active="request()->routeIs('')" wire:navigate>
+                    <x-nav-link :href="route('cursos.materias')" :active="request()->routeIs('cursos.materias')" wire:navigate>
                         {{ __('Materias') }}
                     </x-nav-link>
                     <x-nav-link :href="route('alumnos.cursos')" :active="request()->routeIs('alumnos.cursos', 'alumnos.registro')" wire:navigate>

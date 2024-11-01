@@ -32,7 +32,19 @@ new class extends Component {
                 @can('coordinacion-alumnos')
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                         <x-nav-link :href="route('cursos.alumnos.actividades')" :active="request()->routeIs('cursos.alumnos.actividades')" wire:navigate>
-                            {{ __('Acceso denegado') }}
+                            {{ __('Actividades') }}
+                        </x-nav-link>
+                    </div>
+
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('cursos.alumnos.actividades')" :active="request()->routeIs('')" wire:navigate>
+                            {{ __('Examenes') }}
+                        </x-nav-link>
+                    </div>
+
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('cursos.alumnos.actividades')" :active="request()->routeIs('')" wire:navigate>
+                            {{ __('Videos') }}
                         </x-nav-link>
                     </div>
                 @endcan
@@ -40,12 +52,14 @@ new class extends Component {
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
+                <img class="w-10 h-10 p-1 rounded-full bg-moradoClaro-400 mx-auto mt-6"
+                    src="{{ asset(auth()->user()->url_foto) }}" alt="{{ auth()->user()->nombres }}">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button
                             class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
                             <div>
-                                {{-- {{ auth()->user()->nombres . ' ' . auth()->user()->apellido_paterno }} --}}
+                                {{ auth()->user()->nombres . ' ' . auth()->user()->apellido_paterno }}
                             </div>
 
                             <div class="ms-1">

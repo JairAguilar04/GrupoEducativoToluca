@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Cursos\Alumnos\Actividades\Actividades;
 use App\Livewire\Cursos\Coordinacion\Alumnos;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -14,6 +15,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
             'coordinacion-cursos' => Alumnos::class,
+            'coordinacion-alumnos' => Actividades::class
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

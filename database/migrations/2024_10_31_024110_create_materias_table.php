@@ -11,15 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('condiciones_pago', function (Blueprint $table) {
+        Schema::create('materias', function (Blueprint $table) {
             $table->id();
-            $table->foreignUuid('usuario_id')
-                ->constrained('users', 'id');
-            $table->foreignId('pago_id')
-                ->constrained('pagos', 'id');
-            $table->string('observaciones')->nullable();
-
-            $table->softDeletes();
+            $table->string('nombre', 150);
+            $table->enum('color', ['ROJO', 'VERDE', 'AZUL', 'MORADO', 'AMARILLO', 'ROSA', 'ANARANJADO']);
+            $table->tinyInteger('estatus');
             $table->timestamps();
         });
     }
@@ -29,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('condiciones_pago');
+        Schema::dropIfExists('materias');
     }
 };
