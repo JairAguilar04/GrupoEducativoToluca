@@ -14,9 +14,7 @@ return new class extends Migration
         Schema::create('tutor_alumno', function (Blueprint $table) {
             $table->id();
             $table->foreignUuid('usuario_id')
-                ->constrained('users', 'id')
-                ->noActionOnUpdate()
-                ->onDelete('cascade');
+                ->constrained('users', 'id');
             $table->enum('parentesco', ['Padre', 'Madre'])->nullable();
             $table->string('nombre_completo', 200)->nullable();
             $table->string('domicilio')->nullable();

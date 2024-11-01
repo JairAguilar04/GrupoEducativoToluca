@@ -14,9 +14,7 @@ return new class extends Migration
         Schema::create('documentacion_entregada', function (Blueprint $table) {
             $table->id();
             $table->foreignUuid('usuario_id')
-                ->constrained('users', 'id')
-                ->noActionOnUpdate()
-                ->onDelete('cascade');
+                ->constrained('users', 'id');
             $table->foreignId('documento_id')
                 ->constrained('documentos_entregar')->nullable();
             $table->tinyInteger('entrego')->nullable();

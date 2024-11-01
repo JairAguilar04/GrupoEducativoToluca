@@ -14,9 +14,7 @@ return new class extends Migration
         Schema::create('datos_personales_usuarios', function (Blueprint $table) {
             $table->id();
             $table->foreignUuid('usuario_id')
-                ->constrained('users', 'id')
-                ->noActionOnUpdate()
-                ->onDelete('cascade');
+                ->constrained('users', 'id');
             $table->string('perfil_academico', 150)->nullable();
             $table->date('fecha_nacimiento');
             $table->string('curp', 18)->nullable();

@@ -11,15 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('condiciones_pago', function (Blueprint $table) {
+        Schema::create('grados_academicos', function (Blueprint $table) {
             $table->id();
-            $table->foreignUuid('usuario_id')
-                ->constrained('users', 'id');
-            $table->foreignId('pago_id')
-                ->constrained('pagos', 'id');
-            $table->string('observaciones')->nullable();
-
-            $table->softDeletes();
+            $table->foreignId('nivel_id')
+                ->constrained('niveles', 'id');
+            $table->string('nombre', 100);
             $table->timestamps();
         });
     }
@@ -29,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('condiciones_pago');
+        Schema::dropIfExists('grados_academicos');
     }
 };
