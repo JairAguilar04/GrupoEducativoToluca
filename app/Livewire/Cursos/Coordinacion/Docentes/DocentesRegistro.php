@@ -5,12 +5,13 @@ namespace App\Livewire\Cursos\Coordinacion\Docentes;
 use App\Livewire\Forms\cursos\coordinacion\docentes\DocenteRegistroForm;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
+use Livewire\WithFileUploads;
 
 #[Layout('layouts.admin-cursos')]
 
 class DocentesRegistro extends Component
 {
-
+    use WithFileUploads;
     public DocenteRegistroForm $form;
 
     public $id = 0;

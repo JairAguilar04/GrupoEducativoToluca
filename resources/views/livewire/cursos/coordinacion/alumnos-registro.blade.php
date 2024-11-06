@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
 
-    <div x-data="{ id: $wire.entangle('id'), openn: false }">
+    <div x-data="{ id: $wire.entangle('id'), nivel: $wire.entangle('form.nivelAcademico'), openn: false }">
         <form wire:submit="save">
             @csrf
             <div class="flex flex-col gap-y-8">
@@ -149,6 +149,9 @@
                                         @endempty
                                     </div>
                                 </div>
+                                <div wire:loading wire:target="form.foto">
+                                    <span class="text-sm text-gray-700">Cargando foto...</span>
+                                </div>
                                 <x-input-error :messages="$errors->first('form.foto')" class="mt-2" />
                             </div>
                         </div>
@@ -249,11 +252,11 @@
                     <button type="button" @click="open = ! open" class="button-titulos-form-cursos">
                         Plan de estudios
                     </button>
-                    <div x-data="{ nivel: $wire.entangle('form.nivelAcademico') }" x-show="open" class="flex flex-col gap-y-5 mt-5">
+                    <div x-show="open" class="flex flex-col gap-y-5 mt-5">
                         {{-- nivel academico --}}
                         <div class="flex sm:flex-row flex-col sm:gap-x-5 gap-y-5">
                             <div class="sm:w-1/3 w-full">
-                                <x-input-label for="nivelAcademico" :value="__('Nivel académico')" />
+                                <x-input-label for="nivelAcademico" :value="__('Area de estudios')" />
                                 <select name="nivelAcademico" id="nivelAcademico"
                                     wire:model.live="form.nivelAcademico"
                                     wire:change="limpiarCampo('modalidadColegiatura')" class="input-cursos"
@@ -266,6 +269,20 @@
                                     @endforeach
                                 </select>
                                 <x-input-error :messages="$errors->first('form.nivelAcademico')" class="mt-2" />
+                            </div>
+
+                            <div x-show="nivel == 4" class="sm:w-2/3 w-full">
+                                <x-input-label for="carrera" :value="__('Carrera a estudiar')" />
+                                <select name="carrera" id="carrera" wire:model.live="form.carrera"
+                                    class="input-cursos">
+                                    <option value="">Selecciona una opción</option>
+                                    @foreach ($licenciaturas as $licenciatura)
+                                        <option value="{{ $licenciatura->id }}">
+                                            {{ $licenciatura->nombre }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                <x-input-error :messages="$errors->first('form.carrera')" class="mt-2" />
                             </div>
                         </div>
                         {{-- modalidad y horarios --}}
@@ -344,7 +361,7 @@
                         class="button-titulos-form-cursos">
                         Condiciones de pago
                     </button>
-                    <div x-data="{ observacion: $wire.entangle('form.observacion'), observaciones: $wire.entangle('form.observaciones'), id: $wire.entangle('id'), nivel: $wire.entangle('form.nivelAcademico') }" x-show="open || openn" class="flex flex-col gap-y-5 mt-5">
+                    <div x-data="{ observacion: $wire.entangle('form.observacion'), observaciones: $wire.entangle('form.observaciones') }" x-show="open" class="flex flex-col gap-y-5 mt-5">
                         <div class="flex sm:flex-row flex-col sm:gap-x-8 gap-y-5">
                             <div class="sm:w-1/4 w-full">
                                 <x-input-label for="colegiatura" :value="__('Colegiatura')" />

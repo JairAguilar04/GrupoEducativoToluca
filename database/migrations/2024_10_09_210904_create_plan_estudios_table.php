@@ -19,6 +19,10 @@ return new class extends Migration
             $table->foreignId('nivel_id')
                 ->constrained('niveles', 'id');
 
+            $table->foreignId('grado_id')
+                ->constrained('grados_academicos', 'id')
+                ->nullable();
+
             $table->foreignId('modalidad_id')
                 ->constrained('modalidades_estudios', 'id');
 

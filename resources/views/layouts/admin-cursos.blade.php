@@ -18,14 +18,14 @@
 
 <body class="font-sans antialiased">
     <div class="min-h-screen bg-gray-100">
-        <div x-data="{ open: true }" class="w-full">
+        <div x-data="{ menu: true }" class="w-full">
             <!-- Page Heading -->
             @if (isset($header))
                 <header class="bg-white border-b-2 border-gray-400 shadow flex justify-between sm:h-20">
                     <div class="max-w-7xl py-6 px-4 sm:px-6 lg:px-8 flex sm:flex-row flex-col items-center gap-x-4">
 
                         <div>
-                            <button @click="open = ! open" x-text="open ? 'Ocultar' : 'Ver' "
+                            <button @click="menu = ! menu" x-text="menu ? 'Ocultar' : 'Menú' "
                                 class="button-normal button-normal-color sm:block hidden"></button>
                         </div>
 
@@ -50,7 +50,7 @@
             @endif
 
             <div class="flex">
-                <div x-show="open" class="sm:w-72 sm:flex hidden bg-gray-300 h-screen">
+                <div x-show="menu" class="sm:w-72 sm:flex hidden bg-gray-300 h-screen">
                     <livewire:layout.nav-menu />
                 </div>
 

@@ -100,9 +100,13 @@
                                 <td>{{ $i->email }}</td>
                                 <td>
                                     @if ($i->estatus_id == 1)
-                                        <p class="mx-2 px-2 border border-green-700 bg-green-100 rounded-xl">
-                                            {{ $i->estatus->nombre }}
-                                        </p>
+                                        <button type="button"
+                                            wire:click="$dispatch('openModal', { component: 'cursos.coordinacion.actualizar-estatus-usuario', arguments: { id: '{{ $i->id }}', estado: {{ $i->estatus_id }} , nombre: '{{ $i->nombres }}' } })"
+                                            class="button-normal">
+                                            <p class="mx-2 px-2 border border-green-700 bg-green-100 rounded-xl">
+                                                {{ $i->estatus->nombre }}
+                                            </p>
+                                        </button>
                                     @elseif ($i->estatus_id == 3)
                                         <p class="mx-2 px-2 border border-yellow-700 bg-yellow-100 rounded-xl">
                                             {{ $i->estatus->nombre }}

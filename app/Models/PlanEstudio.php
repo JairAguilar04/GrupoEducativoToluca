@@ -16,6 +16,7 @@ class PlanEstudio extends Model
     protected $fillable = [
         'usuario_id',
         'nivel_id',
+        'grado_id',
         'modalidad_id',
         'horario_id',
     ];
