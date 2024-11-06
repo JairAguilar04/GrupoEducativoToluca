@@ -5,6 +5,7 @@ namespace App\Livewire\Cursos\Coordinacion;
 use App\Livewire\Forms\Cursos\Coordinacion\AlumnosCursosForm;
 use App\Models\CondicionPago;
 use App\Models\DatoPersonal;
+use App\Models\GradoAcademico;
 use App\Models\HorarioModalidad;
 use App\Models\ModalidadEstudio;
 use App\Models\Nivel;
@@ -32,6 +33,7 @@ class AlumnosRegistro extends Component
     public $pagos;
     public $id;
     public $planEstudio;
+    public $licenciaturas;
 
     public function mount($id = 0)
     {
@@ -39,6 +41,8 @@ class AlumnosRegistro extends Component
         $this->form->modalidadEstudio = collect(); // la hacemos coleccion
 
         $this->niveles = Nivel::whereIn('id', [3, 4])->get();
+        $this->licenciaturas = GradoAcademico::where('nivel_id', 5)->get();
+
         $this->id = $id;
 
         if ($this->id != 0) {
@@ -81,9 +85,9 @@ class AlumnosRegistro extends Component
                 $this->form->modalidadEstudio = collect();
                 for ($i = 0; $i < count($modalidad); $i++) {
                     if ($i == 0) {
-                        //dd($modalidad[$i]->horario_id);
                         $this->form->horario = $modalidad[$i]->horario_id;
                         $this->form->nivelAcademico = $modalidad[$i]->nivel_id;
+                        $this->form->carrera = $modalidad[$i]->grado_id;
                     }
                     $this->form->modalidadEstudio->push(
                         $modalidad[$i]->modalidad_id

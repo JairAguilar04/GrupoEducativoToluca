@@ -82,6 +82,9 @@ class AlumnosCursosForm extends Form
     #[Validate('gt:0')]
     public $nivelAcademico;
 
+    #[Validate('required_if:nivelAcademico,4')]
+    public $carrera;
+
     #[Validate('required')]
     public $modalidadEstudio;
 
@@ -119,7 +122,7 @@ class AlumnosCursosForm extends Form
 
         'fechaNacimiento.required' => 'La fecha de nacimiento no puede estar vacía.',
         'fechaNacimiento.date' => 'La fecha de nacimiento no tiene un formato válido.',
-        'fechaNacimiento.before' => 'La fecha de nacimiento 23424.',
+        'fechaNacimiento.before' => 'La fecha de nacimiento es invalida.',
 
         'curp.required' => 'La CURP no puede estar vacía.',
         'curp.regex' => 'La CURP no tiene un formato válido.',
@@ -180,6 +183,8 @@ class AlumnosCursosForm extends Form
         'telefonoParentesco.max' => 'El teléfono del parentesco es demasiado largo.',
 
         'nivelAcademico.gt' => 'El nivel académico no puede estar vacío.',
+
+        'carrera.required_if' => 'La carrera a estudiar no puede estar vacía.',
 
         'modalidadEstudio.required' => 'La modalidad de estudio no puede estar vacía.',
 
@@ -246,6 +251,7 @@ class AlumnosCursosForm extends Form
                 PlanEstudio::create([
                     'usuario_id' => $usuario->id,
                     'nivel_id' => $this->nivelAcademico,
+                    'grado_id' => $this->carrera > 0 ? (int) $this->carrera : null,
                     'modalidad_id' => $key,
                     'horario_id' => $this->horario,
                 ]);
@@ -303,7 +309,7 @@ class AlumnosCursosForm extends Form
             $this->parentesco = empty($this->parentesco) ? null : $this->parentesco;
 
             $tutorUpdate = TutorAlumno::where('usuario_id', $id)->first();
-            if ($tutorUpdate != null) {
+            if ($tutorUpdate != null) { //si hay un registro hacemos el update
                 $tutorUpdate->update([
                     'parentesco' => $this->parentesco,
                     'nombre_completo' => $this->nombreParentesco,
@@ -312,7 +318,7 @@ class AlumnosCursosForm extends Form
                     'ocupacion' => $this->ocupacionParentesco,
                     'telefono' => $this->telefonoParentesco,
                 ]);
-            } else {
+            } elseif ($this->parentesco != null) {
                 TutorAlumno::create([
                     'usuario_id' => $id,
                     'parentesco' => $this->parentesco,
@@ -324,10 +330,11 @@ class AlumnosCursosForm extends Form
                 ]);
             }
 
-            //actualizamos el horario
+            //actualizamos el horario y la carrera
             $horarios = PlanEstudio::where('usuario_id', $id)->get();
             foreach ($horarios as $horario) {
                 $horario->update([
+                    'grado_id' => $this->carrera > 0 ? (int) $this->carrera : null,
                     'horario_id' => $this->horario,
                 ]);
             }

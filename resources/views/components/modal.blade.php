@@ -2,7 +2,7 @@
 
 <div>
     @if ($formAction)
-        <form wire:submit.prevent="">
+        <form wire:submit.prevent="{{ $formAction }}">
             @csrf
     @endif
     <div class="bg-moradoClaro-600 p-4 sm:px-6 sm:py-4 border-b border-gray-150">

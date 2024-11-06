@@ -105,7 +105,7 @@
                                 <input type="file" name="foto" id="foto" wire:model.live="form.foto"
                                     class="input-file-cursos " accept=".png, .jpg" x-bind:disabled="id != 0">
                                 <div class="w-full">
-                                    {{-- @empty($form->foto)
+                                    @empty($form->foto)
                                         <label for="foto" class="text-sm cursor-pointer">
                                             Sin foto seleccionada.
                                         </label>
@@ -131,8 +131,11 @@
                                                 </svg>
                                             </button>
                                         </div>
-                                    @endempty --}}
+                                    @endempty
                                 </div>
+                            </div>
+                            <div wire:loading wire:target="form.foto">
+                                <span class="text-sm text-gray-700">Cargando foto...</span>
                             </div>
                             <x-input-error :messages="$errors->first('form.foto')" class="mt-2" />
                         </div>
