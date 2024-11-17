@@ -139,7 +139,7 @@
             </div>
 
             {{-- paginador --}}
-            <div class="sm:w-4/5 w-full mt-5">
+            <div class="sm:px-20 w-full mt-5">
                 {{ $usuarios->links() }}
             </div>
         @else

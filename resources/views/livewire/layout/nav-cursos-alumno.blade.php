@@ -48,6 +48,14 @@ new class extends Component {
                         </x-nav-link>
                     </div>
                 @endcan
+
+                @can('coordinacion-docentes')
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('cursos.docentes.actividades')" :active="request()->routeIs('cursos.docentes.actividades')" wire:navigate>
+                            {{ __('Actividades') }}
+                        </x-nav-link>
+                    </div>
+                @endcan
             </div>
 
             <!-- Settings Dropdown -->

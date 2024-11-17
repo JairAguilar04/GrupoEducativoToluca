@@ -56,16 +56,14 @@ class AlumnosRegistro extends Component
 
             // datos personales
             $datosPersonales = DatoPersonal::where('usuario_id', $id)->first();
-            if ($datosPersonales != null) {
-                $this->form->fechaNacimiento = $datosPersonales->fecha_nacimiento;
-                $this->form->curp = $datosPersonales->curp;
-                $this->form->edad = $datosPersonales->edad;
-                $this->form->sexo = $datosPersonales->sexo;
-                $this->form->domicilio = $datosPersonales->domicilio;
-                $this->form->localidadMunicipio = $datosPersonales->localidad_municipio;
-                $this->form->telefono = $datosPersonales->telefono;
-                $this->form->colonia = $datosPersonales->colonia;
-            }
+            $this->form->fechaNacimiento = $datosPersonales->fecha_nacimiento;
+            $this->form->curp = $datosPersonales->curp;
+            $this->form->edad = $datosPersonales->edad;
+            $this->form->sexo = $datosPersonales->sexo;
+            $this->form->domicilio = $datosPersonales->domicilio;
+            $this->form->localidadMunicipio = $datosPersonales->localidad_municipio;
+            $this->form->telefono = $datosPersonales->telefono;
+            $this->form->colonia = $datosPersonales->colonia;
 
 
             //datos familiar
@@ -81,40 +79,26 @@ class AlumnosRegistro extends Component
 
             //modalidad de estudio
             $modalidad = PlanEstudio::where('usuario_id', $id)->get();
-            if ($modalidad != null) {
-                $this->form->modalidadEstudio = collect();
-                for ($i = 0; $i < count($modalidad); $i++) {
-                    if ($i == 0) {
-                        $this->form->horario = $modalidad[$i]->horario_id;
-                        $this->form->nivelAcademico = $modalidad[$i]->nivel_id;
-                        $this->form->carrera = $modalidad[$i]->grado_id;
-                    }
-                    $this->form->modalidadEstudio->push(
-                        $modalidad[$i]->modalidad_id
-                    );
-                    $this->planEstudio = $modalidad->whereIn('modalidad_id', $this->form->modalidadEstudio);
+            $this->form->modalidadEstudio = collect();
+            for ($i = 0; $i < count($modalidad); $i++) {
+                if ($i == 0) {
+                    $this->form->horario = $modalidad[$i]->horario_id;
+                    $this->form->nivelAcademico = $modalidad[$i]->nivel_id;
+                    $this->form->carrera = $modalidad[$i]->grado_id;
                 }
-
-                //dd($this->form->modalidadEstudio);
-                // foreach ($modalidad as $mod => $key) {
-                //     $this->form->nivelAcademico = $key->nivel_id;
-                //     $this->form->horario = $key->horario_id;
-                //     $this->form->modalidadEstudio = collect();
-                //     $this->form->modalidadEstudio = $mod->modalidad_id;
-                //     $this->form->modalidadEstudio->push(
-                //         $key->modalidad_id
-                //     );
-                // }
+                $this->form->modalidadEstudio->push(
+                    $modalidad[$i]->modalidad_id
+                );
+                $this->planEstudio = $modalidad->whereIn('modalidad_id', $this->form->modalidadEstudio);
             }
+
 
             //condicion pago
             $pago = CondicionPago::where('usuario_id', $id)->first();
-            if ($pago != null) {
-                $this->form->colegiatura = $pago->pago_id;
-                $this->form->observaciones = $pago->observaciones;
+            $this->form->colegiatura = $pago->pago_id;
+            $this->form->observaciones = $pago->observaciones;
 
-                $this->form->observaciones != null ? $this->form->observacion = 1 : $this->form->observacion = 0;
-            }
+            $this->form->observaciones != null ? $this->form->observacion = 1 : $this->form->observacion = 0;
         }
     }
 
@@ -127,7 +111,7 @@ class AlumnosRegistro extends Component
         $this->horarios = HorarioModalidad::where('modalidad_id', $this->form->modalidadEstudio->first())->get();
 
         // calcular la edad automaticamente y si es mayor de edad
-        if ($this->form->fechaNacimiento != null) {
+        if (!empty($this->form->fechaNacimiento)) {
             $this->form->edad = Carbon::createFromDate($this->form->fechaNacimiento)->age;
 
             if ($this->form->edad < 18) {

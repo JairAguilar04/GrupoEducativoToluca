@@ -31,6 +31,7 @@ class AlumnosCursosForm extends Form
     #[Validate('required|before:today')]
     public $fechaNacimiento = '';
 
+
     #[Validate('nullable|max:18|regex:/^[A-Za-z0-9]*$/u|min:18')]
     public $curp = '';
 
@@ -46,12 +47,12 @@ class AlumnosCursosForm extends Form
     public $colonia;
 
     #[Validate('required|max:150')]
-    public $localidadMunicipio = 'Toluca';
+    public $localidadMunicipio = 'Toluca de lerdo';
 
     //#[Validate('required|mimes:jpg,png|max:2000')]
     public $foto = null;
 
-    #[Validate('required|regex:/^[0-9()+]*$/u|min:10|max:15')]
+    #[Validate('required|regex:/^[0-9()+]*$/u|size:10')]
     public $telefono = '';
 
     // #[Validate("required|email|unique:users,email|regex:'^[^@]+@[^@]+\.[a-zA-Z]{2,}$'|max:100")]
@@ -75,7 +76,7 @@ class AlumnosCursosForm extends Form
     #[Validate('required_if:menorEdad,1|max:150')]
     public $ocupacionParentesco = '';
 
-    #[Validate('required_if:menorEdad,1|regex:/^[0-9()+]*$/u|min:10|max:15')]
+    #[Validate('required_if:menorEdad,1|regex:/^[0-9()+]*$/u|size:10')]
     public $telefonoParentesco = '';
 
     // modalidad de estudio
@@ -98,7 +99,7 @@ class AlumnosCursosForm extends Form
     #[Validate('required')]
     public $observacion; //bandera para saber si habra observaciones
 
-    #[Validate('required_if:observacion,1')]
+    #[Validate('required_if:observacion,1|max:255')]
     public $observaciones = null;
 
     public $rol;
@@ -148,8 +149,7 @@ class AlumnosCursosForm extends Form
 
         'telefono.required' => 'El teléfono del alumno no puede estar vacío.',
         'telefono.regex' => 'El teléfono del alumno no tiene un formato valido.',
-        'telefono.min' => 'El teléfono del alumno debe de contener 10 caracteres.',
-        'telefono.max' => 'El teléfono del alumno es demasiado largo.',
+        'telefono.size' => 'El teléfono del alumno debe de contener 10 caracteres.',
 
 
         'email.required' => 'El correo electrónico no puede estar vacío.',
@@ -179,8 +179,7 @@ class AlumnosCursosForm extends Form
 
         'telefonoParentesco.required_if' => 'El teléfono del parentesco no puede estar vacío.',
         'telefonoParentesco.regex' => 'El teléfono del parentesco no tiene un formato valido.',
-        'telefonoParentesco.min' => 'El teléfono del parentesco debe de contener 10 caracteres.',
-        'telefonoParentesco.max' => 'El teléfono del parentesco es demasiado largo.',
+        'telefonoParentesco.size' => 'El teléfono del parentesco debe de contener 10 caracteres.',
 
         'nivelAcademico.gt' => 'El nivel académico no puede estar vacío.',
 
@@ -195,6 +194,7 @@ class AlumnosCursosForm extends Form
         'observacion.required' => 'Debes de seleccionar una opción.',
 
         'observaciones.required_if' => 'La observación no pueden estar vacía.',
+        'observaciones.max' => 'La observación es demasiado larga.',
     ];
 
 
@@ -348,7 +348,7 @@ class AlumnosCursosForm extends Form
 
 
             DB::commit();
-            return redirect('/cursos/alumnos')->with('success', 'El alumno con matricula ' . $this->matricula . ' ha sido actualizado correctamente.');
+            return redirect('/cursos/alumnos')->with('success', 'El alumno con matricula ' . $this->matricula . ', ha sido actualizado correctamente.');
         } catch (\Exception $e) {
             DB::rollback();
             return redirect()->back()->with('errorDb', 'Error al actualizar al alumno.' . $e->getMessage());
