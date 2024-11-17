@@ -1,11 +1,11 @@
 <div>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Registrar docente') }}
+            {{ $form->id == 0 ? 'Registrar docente' : 'Editar docente: ' . $form->matricula }}
         </h2>
     </x-slot>
 
-    <div x-data="{ id: $wire.entangle('id') }">
+    <div x-data="{ id: $wire.entangle('form.id') }">
         <form wire:submit="save">
             @csrf
             <div class="flex flex-col gap-y-8">
@@ -88,9 +88,9 @@
                         </div>
                     </div>
 
-                    {{-- perfil academico y foto --}}
+                    {{-- perfil academico y rol --}}
                     <div class="flex sm:flex-row flex-col sm:gap-x-5 gap-y-5">
-                        <div class="sm:w-3/5 w-full">
+                        <div class="sm:w-1/2 w-full">
                             <x-input-label for="perfilAcademico" :value="__('Perfil académico')" />
                             <input type="text" name="perfilAcademico" id="perfilAcademico"
                                 wire:model.live="form.perfilAcademico" class="input-cursos"
@@ -98,7 +98,39 @@
                             <x-input-error :messages="$errors->first('form.perfilAcademico')" class="mt-2" />
                         </div>
 
+                        <div class="sm:w-1/2 w-full">
+                            <x-input-label for="rol" :value="__('Nivel del docente')" />
+                            <select name="rol" id="rol" wire:model.live="form.rol" class="input-cursos">
+                                <option value="0">Seleccione una opción</option>
+                                @foreach ($roles as $rol)
+                                    <option value="{{ $rol->id }}">{{ $rol->nombre }}</option>
+                                @endforeach
+                            </select>
+
+                            <x-input-error :messages="$errors->first('form.rol')" class="mt-2" />
+                        </div>
+                    </div>
+
+                    {{-- telefono y correo --}}
+                    <div class="flex sm:flex-row flex-col sm:gap-x-5 gap-y-5">
                         <div class="sm:w-2/5 w-full">
+                            <x-input-label for="telefono" :value="__('Teléfono')" />
+                            <input type="text" name="telefono" id="telefono" wire:model.live="form.telefono"
+                                class="input-cursos" placeholder="Teléfono" />
+                            <x-input-error :messages="$errors->first('form.telefono')" class="mt-2" />
+                        </div>
+
+                        <div class="sm:w-3/5 w-full">
+                            <x-input-label for="email" :value="__('Correo electrónico')" />
+                            <input type="text" name="email" id="email" wire:model.live="form.email"
+                                class="input-cursos" placeholder="Correo electrónico" />
+                            <x-input-error :messages="$errors->first('form.email')" class="mt-2" />
+                        </div>
+                    </div>
+
+                    {{-- foto y entrego todos sus documentos --}}
+                    <div class="flex sm:flex-row flex-col sm:gap-x-5 gap-y-5">
+                        <div class="sm:w-3/5 w-full">
                             <x-input-label for="foto" :value="__('Foto')" />
                             <div
                                 class="flex items-center gap-x-2 border-2 border-moradoClaro-500 border-l-0 h-10 rounded-r-md">
@@ -113,11 +145,11 @@
                                     @empty(!$form->foto)
                                         <div class="flex justify-between items-center">
                                             <p title="Clic para quitar archivo adjuntado." class="text-sm cursor-pointer">
-                                                @if ($id == 0)
+                                                @if ($form->id == 0)
                                                     {{ $form->foto->getClientOriginalName() }}
                                                 @elseif(Str::contains($form->foto, '\Temp'))
                                                     {{ $form->foto->getClientOriginalName() }}
-                                                @elseif($id != 0)
+                                                @elseif($form->id != 0)
                                                     {{ Str::after($form->foto, 'fotos/') }}
                                                 @endif
                                             </p>
@@ -139,33 +171,14 @@
                             </div>
                             <x-input-error :messages="$errors->first('form.foto')" class="mt-2" />
                         </div>
-                    </div>
 
-                    {{-- perfil academico y foto --}}
-                    <div class="flex sm:flex-row flex-col sm:gap-x-5 gap-y-5">
                         <div class="sm:w-2/5 w-full">
-                            <x-input-label for="telefono" :value="__('Teléfono')" />
-                            <input type="text" name="telefono" id="telefono" wire:model.live="form.telefono"
-                                class="input-cursos" placeholder="Teléfono" />
-                            <x-input-error :messages="$errors->first('form.telefono')" class="mt-2" />
-                        </div>
-
-                        <div class="sm:w-3/5 w-full">
-                            <x-input-label for="email" :value="__('Correo electrónico')" />
-                            <input type="text" name="email" id="email" wire:model.live="form.email"
-                                class="input-cursos" placeholder="Correo electrónico" x-bind:disabled="id != 0" />
-                            <x-input-error :messages="$errors->first('form.email')" class="mt-2" />
-                        </div>
-                    </div>
-
-                    {{-- entrego todos sus documentos y observaciones --}}
-                    <div class="flex sm:flex-row flex-col sm:gap-x-5 gap-y-5">
-                        <div class="sm:w-1/4 w-full">
                             <x-input-label for="si" :value="__('¿Entrego todos sus documentos?')" />
                             <div class="flex gap-x-5 sm:justify-normal justify-between sm:mx-0 mx-10">
                                 <div>
                                     <input type="radio" name="documentos" id="si" value="1"
-                                        wire:model.live="form.documentosEntregados" class="imput-radio-cursos">
+                                        wire:model.live="form.documentosEntregados"
+                                        wire:click="limpiarCampo('observaciones')" class="imput-radio-cursos">
                                     <label for="si">Si</label>
                                 </div>
                                 <div>
@@ -176,27 +189,10 @@
                             </div>
                             <x-input-error :messages="$errors->first('form.documentosEntregados')" class="mt-2" />
                         </div>
-
-                        <div class="sm:w-2/4 w-full">
-                            <x-input-label for="yes" :value="__('¿Deseas agregar alguna observación?')" />
-                            <div class="flex gap-x-5 sm:justify-normal justify-between sm:mx-0 mx-10">
-                                <div>
-                                    <input type="radio" name="observacion" id="yes" value="1"
-                                        wire:model.live="form.observacion" class="imput-radio-cursos">
-                                    <label for="yes" class="font-medium text-sm mb-2">Si</label>
-                                </div>
-                                <div>
-                                    <input type="radio" name="observacion" id="noo" value="0"
-                                        wire:model.live="form.observacion" class="imput-radio-cursos">
-                                    <label for="noo" class="font-medium text-sm mb-2">No</label>
-                                </div>
-                            </div>
-                            <x-input-error :messages="$errors->first('form.observacion')" class="mt-2" />
-                        </div>
                     </div>
 
-                    <div class="flex sm:flex-row flex-col sm:gap-x-5 gap-y-5">
-                        <div class="sm:w-3/4">
+                    <div x-data="{ entrego: $wire.entangle('form.documentosEntregados') }" class="flex sm:flex-row flex-col sm:gap-x-5 gap-y-5">
+                        <div x-show="entrego == 0" class="sm:w-5/6 w-full">
                             <x-input-label for="observaciones" :value="__('Observaciones')" />
                             <textarea name="observaciones" id="observaciones" wire:model.live="form.observaciones" cols="10"
                                 rows="4" class="textarea-cursos" placeholder="Observaciones"></textarea>
@@ -208,11 +204,40 @@
                 {{-- botones --}}
                 <div class="flex sm:flex-row flex-col sm:justify-end justify-center mt-5">
                     <x-secondary-button class="button-secondary-cursos">
-                        <a href="/cursos/alumnos">Regresar</a>
+                        <a href="/cursos/docentes">Regresar</a>
                     </x-secondary-button>
-
-                    <x-primary-button class="button-primary-cursos">Guardar</x-primary-button>
+                    {{-- registro nuevo --}}
+                    @if ($form->id == 0)
+                        <x-primary-button class="button-primary-cursos">Guardar</x-primary-button>
+                    @else
+                        {{-- actualizar datos --}}
+                        <x-secondary-button wire:click="update('{{ $form->id }}')" class="button-primary-cursos">
+                            Guardar
+                        </x-secondary-button>
+                    @endif
                 </div>
         </form>
+
+        {{-- errores en formulario --}}
+        @if ($errors->any())
+            <div class="bg-moradoClaro-100 mt-5">
+                <h2 class="bg-moradoClaro-400 text-white text-xl pl-2">Faltan campos por completar:</h2>
+                <p class="p-4">
+                    Comprueba que todos los campos esten llenos o que cumplan con el formato solicitado, todos los
+                    campos con <span class="text-red-600 font-bold">*</span> son requeridos.
+                </p>
+            </div>
+        @endif
+
+        {{-- error en base de datos --}}
+        @session('errorDb')
+            <div class="bg-red-100 mt-5">
+                <h2 class="bg-red-500 text-white text-xl pl-2">Error en DB:</h2>
+                <p class="p-4">
+                    {{ Session::get('errorDb') }}
+                </p>
+            </div>
+        @endsession
+
     </div>
 </div>

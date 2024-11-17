@@ -18,6 +18,16 @@
                 </select>
                 <x-input-error :messages="$errors->first('estado')" class="mt-2" />
             </div>
+
+            {{-- error en base de datos --}}
+            @session('errorDb')
+                <div class="bg-red-100 mt-5">
+                    <h2 class="bg-red-500 text-white text-xl pl-2">Error en DB:</h2>
+                    <p class="p-4">
+                        {{ Session::get('errorDb') }}
+                    </p>
+                </div>
+            @endsession
         </x-slot>
 
         <x-slot name="buttons">

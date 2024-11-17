@@ -7,6 +7,7 @@ use App\Livewire\Cursos\Coordinacion\Docentes\Docentes;
 use App\Livewire\Cursos\Coordinacion\Docentes\DocentesRegistro;
 use App\Livewire\Cursos\Coordinacion\Grados\Grados;
 use App\Livewire\Cursos\Coordinacion\Materias\Materias;
+use App\Livewire\Cursos\Docentes\Actividades\AsignarActividad;
 use Illuminate\Container\Attributes\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -49,6 +50,12 @@ Route::middleware(['auth', 'can:coordinacion-alumnos'])->group(function () {
 
     Route::get('/cursos/alumnos-actividades', Actividades::class)
         ->name('cursos.alumnos.actividades');
+});
+
+Route::middleware(['auth', 'can:coordinacion-docentes'])->group(function () {
+
+    Route::get('/cursos/docentes/asignar-actividades', AsignarActividad::class)
+        ->name('cursos.docentes.actividades');
 });
 
 require __DIR__ . '/auth.php';

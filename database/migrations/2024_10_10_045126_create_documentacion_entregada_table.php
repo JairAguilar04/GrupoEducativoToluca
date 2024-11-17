@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string('observaciones')->nullable()
                 ->comment('Este campo es para los docentes');
 
+            $table->softDeletes();
             $table->timestamps();
         });
     }

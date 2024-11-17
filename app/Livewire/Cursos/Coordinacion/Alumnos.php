@@ -93,7 +93,7 @@ class Alumnos extends Component
             $colegiatura->delete();
 
             DB::commit();
-            return redirect('/cursos/alumnos')->with('success', 'El alumno fue eluminado correctamente.');
+            return redirect('/cursos/alumnos')->with('success', 'El alumno fue eliminado correctamente.');
         } catch (\Exception $e) {
             DB::rollback();
             return redirect()->back()->with('errorDb', 'Error al eliminar al alumno.' . $e->getMessage());

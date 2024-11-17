@@ -5,6 +5,33 @@
         </h2>
     </x-slot>
 
+    {{-- alerta de registro creado, actualizado o eliminado --}}
+    @session('success')
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                iconColor: '#4a3d62',
+                text: '{{ Session::get('success') }}',
+                confirmButtonColor: '#6c7cc5',
+                confirmButtonText: 'Aceptar',
+                showConfirmButton: true,
+                //timer: 2500
+            });
+        </script>
+    @endsession
+
+    {{-- error en base de datos --}}
+    @session('errorDb')
+        <div class="bg-red-100 my-5">
+            <h2 class="bg-red-500 text-white text-xl pl-2">Error en DB:</h2>
+            <p class="p-4">
+                {{ Session::get('errorDb') }}
+            </p>
+        </div>
+    @endsession
+
     {{-- buscador --}}
     <div class="flex sm:w-3/4 mx-auto relative">
         <input type="text" name="buscador" id="buscador" wire:model.live="search" class="ps-10 p-2.5 pr-14 input-cursos"
@@ -83,9 +110,13 @@
                                 <td>{{ $i->email }}</td>
                                 <td>
                                     @if ($i->estatus_id == 1)
-                                        <p class="mx-2 px-2 border border-green-700 bg-green-100 rounded-xl">
-                                            {{ $i->estatus->nombre }}
-                                        </p>
+                                        <button type="button"
+                                            wire:click="$dispatch('openModal', { component: 'cursos.coordinacion.actualizar-estatus-usuario', arguments: { id: '{{ $i->id }}', estado: {{ $i->estatus_id }} , nombre: '{{ $i->nombres }}' } })"
+                                            class="button-normal">
+                                            <p class="mx-2 px-2 border border-green-700 bg-green-100 rounded-xl">
+                                                {{ $i->estatus->nombre }}
+                                            </p>
+                                        </button>
                                     @elseif ($i->estatus_id == 3)
                                         <p class="mx-2 px-2 border border-yellow-700 bg-yellow-100 rounded-xl">
                                             {{ $i->estatus->nombre }}
@@ -99,14 +130,14 @@
                                 <td>
                                     <div class="flex sm:flex-row flex-col sm:gap-x-4 gap-y-4">
                                         <button type="button" class="button-normal">
-                                            <a href="/cursos/alumnos-registro/{{ $i->id }}">
-                                                <img src="{{ asset('img/botones/editar.png') }}" alt=""
+                                            <a href="/cursos/docente-registro/{{ $i->id }}">
+                                                <img src="{{ asset('img/botones/editar.png') }}" alt="Botón editar"
                                                     class="w-10 h-10">
                                             </a>
                                         </button>
                                         <button class="button-normal"
                                             @click="eliminar('{{ $i->id }}', '{{ $i->nombres }}')">
-                                            <img src="{{ asset('img/botones/eliminar.png') }}" alt=""
+                                            <img src="{{ asset('img/botones/eliminar.png') }}" alt="Botón eliminar"
                                                 class="w-10 h-10">
                                         </button>
                                     </div>
@@ -118,7 +149,7 @@
             </div>
 
             {{-- paginador --}}
-            <div class="sm:w-4/5 w-full mt-5">
+            <div class="sm:px-20 w-full mt-5">
                 {{ $docentes->links() }}
             </div>
         @else
@@ -128,4 +159,32 @@
             </div>
         @endif
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        function eliminar(id, nombre) {
+            Swal.fire({
+                customClass: {
+                    title: 'swal2-title'
+                },
+                title: '¿Estas seguro de eliminar al docente ' + nombre + '?',
+                text: 'Una vez eliminado ya no será posible recuperarlo.',
+                position: 'center',
+                icon: 'warning',
+                iconColor: '#484d9b',
+                showCancelButton: true,
+                confirmButtonColor: '#6c7cc5',
+                cancelButtonColor: '#4a3d62',
+                confirmButtonText: 'Si, eliminar',
+                cancelButtonText: 'Cerrar',
+
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Livewire.dispatch('delete', {
+                        id
+                    })
+                }
+            });
+        }
+    </script>
 </div>
