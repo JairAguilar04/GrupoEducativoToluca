@@ -6,6 +6,7 @@ use App\Livewire\Cursos\Coordinacion\AlumnosRegistro;
 use App\Livewire\Cursos\Coordinacion\Docentes\Docentes;
 use App\Livewire\Cursos\Coordinacion\Docentes\DocentesRegistro;
 use App\Livewire\Cursos\Coordinacion\Grados\Grados;
+use App\Livewire\Cursos\Coordinacion\Grupos\Grupos;
 use App\Livewire\Cursos\Coordinacion\Materias\Materias;
 use App\Livewire\Cursos\Docentes\Actividades\AsignarActividad;
 use Illuminate\Container\Attributes\Auth;
@@ -44,6 +45,10 @@ Route::middleware(['auth', 'can:coordinacion-cursos'])->group(function () {
     //grados
     Route::get('/cursos/grados-academicos', Grados::class)
         ->name('cursos.grados');
+
+    //grupos
+    Route::get('/cursos/grupos', Grupos::class)
+        ->name('cursos.grupos');
 });
 
 Route::middleware(['auth', 'can:coordinacion-alumnos'])->group(function () {

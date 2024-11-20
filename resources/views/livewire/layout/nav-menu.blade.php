@@ -33,7 +33,7 @@ new class extends Component {
 
                 <!-- Navigation Links -->
                 <div class="hidden sm:flex flex-col w-full pl-4 gap-y-1 bg-gray-100 px-5">
-                    <x-nav-link :href="route('alumnos.cursos')" :active="request()->routeIs('')" wire:navigate>
+                    <x-nav-link :href="route('cursos.grupos')" :active="request()->routeIs('cursos.grupos')" wire:navigate>
                         {{ __('Grupos') }}
                     </x-nav-link>
                     <x-nav-link :href="route('cursos.grados')" :active="request()->routeIs('cursos.grados')" wire:navigate>
