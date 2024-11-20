@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('materias', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre', 150);
-            $table->enum('color', ['ROJO', 'VERDE', 'AZUL', 'MORADO', 'AMARILLO', 'ROSA', 'ANARANJADO']);
+            $table->string('nombre', 150)->unique();
+            $table->enum('color', ['Rojo', 'Verde', 'Azul', 'Morado', 'Amarillo', 'Rosa', 'Anaranjado']);
             $table->tinyInteger('estatus');
             $table->timestamps();
         });
