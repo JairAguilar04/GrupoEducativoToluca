@@ -29,17 +29,16 @@
                 class="ps-10 p-2.5 pr-14 input-cursos" placeholder="Buscador">
             <div class="absolute top-1 right-1">
                 {{-- agregar un nuevo registro --}}
-                <button type="button"
-                    onclick="Livewire.dispatch('openModal', { component: 'cursos.coordinacion.grados.grados-registro' })"
-                    class="button-normal">
-                    <div>
-                        <?xml version="1.0"?><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" width="30px"
-                            height="30px">
-                            <path
-                                d="M15,3C8.373,3,3,8.373,3,15c0,6.627,5.373,12,12,12s12-5.373,12-12C27,8.373,21.627,3,15,3z M21,16h-5v5 c0,0.553-0.448,1-1,1s-1-0.447-1-1v-5H9c-0.552,0-1-0.447-1-1s0.448-1,1-1h5V9c0-0.553,0.448-1,1-1s1,0.447,1,1v5h5 c0.552,0,1,0.447,1,1S21.552,16,21,16z" />
-                        </svg>
-                    </div>
-
+                <button type="button" class="button-normal">
+                    <a href="/cursos/grupos-registro">
+                        <div>
+                            <?xml version="1.0"?><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30"
+                                width="30px" height="30px">
+                                <path
+                                    d="M15,3C8.373,3,3,8.373,3,15c0,6.627,5.373,12,12,12s12-5.373,12-12C27,8.373,21.627,3,15,3z M21,16h-5v5 c0,0.553-0.448,1-1,1s-1-0.447-1-1v-5H9c-0.552,0-1-0.447-1-1s0.448-1,1-1h5V9c0-0.553,0.448-1,1-1s1,0.447,1,1v5h5 c0.552,0,1,0.447,1,1S21.552,16,21,16z" />
+                            </svg>
+                        </div>
+                    </a>
                 </button>
             </div>
             <div class="absolute top-3 right-12">
@@ -73,18 +72,9 @@
                                         Grupo
                                     </h3>
                                 </div>
-                                <div class="flex justify-between items-center gap-x-4 p-2 ">
-                                    <div class="w-3/5">
-                                        <p>{{ $grupo->nombre }}
-                                        </p>
-                                    </div>
-                                    <div class="flex flex-col gap-y-2 w-2/5">
-                                        <button type="button"
-                                            wire:click="$dispatch('openModal', { component: 'cursos.coordinacion.grados.grados-registro', arguments: { id: {{ $grupo->id }}, formAction: 'update' } })"
-                                            class="button-primary-cursos p-1 rounded-lg">
-                                            Editar
-                                        </button>
-                                    </div>
+                                <div class="w-full p-2">
+                                    <p>{{ $grupo->nombre }}
+                                    </p>
                                 </div>
                             </div>
                         </div>

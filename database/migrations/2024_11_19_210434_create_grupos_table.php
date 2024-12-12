@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('nombre', 50);
             $table->enum('turno', ['Matutino', 'Vespertino']);
             $table->integer('capacidad');
+            $table->string('color', 50);
             $table->tinyInteger('finalizado');
             $table->date('fecha_inicio');
             $table->date('fecha_fin');

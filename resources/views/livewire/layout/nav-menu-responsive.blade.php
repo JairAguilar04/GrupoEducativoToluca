@@ -52,10 +52,6 @@ new class extends Component {
                             {{ __('Perfil') }}
                         </x-dropdown-link> --}}
 
-                        <x-dropdown-link :href="route('alumnos.cursos')">
-                            Perfil
-                        </x-dropdown-link>
-
                         <!-- Authentication -->
                         <button wire:click="logout" class="w-full text-start">
                             <x-dropdown-link>
@@ -85,11 +81,20 @@ new class extends Component {
     <!-- Responsive Navigation Menu -->
     <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('alumnos.cursos')" :active="request()->routeIs('alumnos.cursos')" wire:navigate>
+            <x-responsive-nav-link :href="route('cursos.grupos')" :active="request()->routeIs('cursos.grupos', 'cursos.grupos.registro')" wire:navigate>
                 {{ __('Grupos') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('alumnos.cursos')" :active="request()->routeIs('alumnos.cursos')" wire:navigate>
+            <x-responsive-nav-link :href="route('cursos.grados')" :active="request()->routeIs('cursos.grados')" wire:navigate>
+                {{ __('Grados academicos') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('cursos.materias')" :active="request()->routeIs('cursos.materias')" wire:navigate>
+                {{ __('Materias') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('alumnos.cursos')" :active="request()->routeIs('alumnos.cursos', 'alumnos.registro')" wire:navigate>
                 {{ __('Alumnos') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('cursos.docentes')" :active="request()->routeIs('cursos.docentes', 'cursos.docentes.registro')" wire:navigate>
+                {{ __('Docentes') }}
             </x-responsive-nav-link>
         </div>
 

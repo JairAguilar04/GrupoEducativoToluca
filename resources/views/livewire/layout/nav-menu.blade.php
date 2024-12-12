@@ -15,11 +15,11 @@ new class extends Component {
     }
 }; ?>
 
-<nav x-data="{ open: false }" class="bg-white border-r-2 border-gray-100 w-full">
+<nav x-data="{ open: false }" class="bg-transparent border-r-2 border-gray-100 w-full">
     <!-- Primary Navigation Menu -->
-    <div class="max-w-7xl">
+    <div class="">
         <div class="flex justify-center">
-            <div class="flex flex-col gap-y-5 items-center w-full">
+            <div class="flex flex-col items-center w-full">
                 <!-- Logo -->
                 {{-- <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}" wire:navigate>
@@ -27,13 +27,14 @@ new class extends Component {
                     </a>
                 </div> --}}
 
-                <div class="mt-2">
+                <div
+                    class="bg-moradoClaro-300 rounded-r-xl rounded-l-none rounded-b-none w-full text-center text-moradoFuerte-700 font-bold text-xl">
                     Menú
                 </div>
 
                 <!-- Navigation Links -->
-                <div class="hidden sm:flex flex-col w-full pl-4 gap-y-1 bg-gray-100 px-5">
-                    <x-nav-link :href="route('cursos.grupos')" :active="request()->routeIs('cursos.grupos')" wire:navigate>
+                <div class="hidden sm:flex flex-col w-full h-screen pl-4 gap-y-1 bg-[#e6e6e6] px-5">
+                    <x-nav-link :href="route('cursos.grupos')" :active="request()->routeIs('cursos.grupos', 'cursos.grupos.registro')" wire:navigate>
                         {{ __('Grupos') }}
                     </x-nav-link>
                     <x-nav-link :href="route('cursos.grados')" :active="request()->routeIs('cursos.grados')" wire:navigate>
@@ -47,9 +48,6 @@ new class extends Component {
                     </x-nav-link>
                     <x-nav-link :href="route('cursos.docentes')" :active="request()->routeIs('cursos.docentes', 'cursos.docentes.registro')" wire:navigate>
                         {{ __('Docentes') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('alumnos.cursos')" :active="request()->routeIs('')" wire:navigate>
-                        {{ __('Calificaciones') }}
                     </x-nav-link>
                 </div>
             </div>

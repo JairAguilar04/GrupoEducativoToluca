@@ -72,7 +72,7 @@
         <div>
             @if ($materias->first())
                 {{-- grid de materias --}}
-                <div class="grid grid-cols-4 gap-4 mt-8">
+                <div class="grid sm:grid-cols-4 grid-cols-2 gap-4 mt-8">
                     @foreach ($materias as $materia)
                         <div
                             class="@if ($materia->color == 'Rojo') bg-red-300 @elseif($materia->color == 'Azul') bg-blue-300 @elseif($materia->color == 'Morado') bg-purple-300 @elseif($materia->color == 'Rosa') bg-pink-300 @elseif($materia->color == 'Verde') bg-green-300 @elseif($materia->color == 'Anaranjado') bg-orange-300 @elseif($materia->color == 'Amarillo') bg-yellow-300 @else bg-moradoClaro-300 @endif
