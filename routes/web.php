@@ -7,9 +7,9 @@ use App\Livewire\Cursos\Coordinacion\Docentes\Docentes;
 use App\Livewire\Cursos\Coordinacion\Docentes\DocentesRegistro;
 use App\Livewire\Cursos\Coordinacion\Grados\Grados;
 use App\Livewire\Cursos\Coordinacion\Grupos\Grupos;
+use App\Livewire\Cursos\Coordinacion\Grupos\GruposRegistro;
 use App\Livewire\Cursos\Coordinacion\Materias\Materias;
 use App\Livewire\Cursos\Docentes\Actividades\AsignarActividad;
-use Illuminate\Container\Attributes\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'welcome');
@@ -49,6 +49,9 @@ Route::middleware(['auth', 'can:coordinacion-cursos'])->group(function () {
     //grupos
     Route::get('/cursos/grupos', Grupos::class)
         ->name('cursos.grupos');
+
+    Route::get('/cursos/grupos-registro', GruposRegistro::class)
+        ->name('cursos.grupos.registro');
 });
 
 Route::middleware(['auth', 'can:coordinacion-alumnos'])->group(function () {

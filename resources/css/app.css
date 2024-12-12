@@ -74,7 +74,8 @@ table tr:nth-child(odd) {
 
 
 .button-primary-cursos {
-    @apply bg-moradoClaro-500 text-white hover:bg-moradoClaro-700 focus:ring-2 focus:outline-none focus:ring-moradoClaro-700;
+    @apply bg-moradoClaro-500 text-white hover:bg-moradoClaro-700 focus:ring-2 focus:outline-none focus:ring-moradoClaro-700
+    disabled:hover:bg-gray-400 disabled:hover:scale-75 disabled:delay-500;
 }
 
 .button-secondary-cursos {

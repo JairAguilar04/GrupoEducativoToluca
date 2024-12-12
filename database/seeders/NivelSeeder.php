@@ -18,7 +18,7 @@ class NivelSeeder extends Seeder
             ['nombre' => 'Licenciatura'],
             ['nombre' => 'Cursos preparatoria'],
             ['nombre' => 'Cursos licenciatura'],
-            ['nombre' => 'Cursos licenciatura (2da etapa)'],
+            ['nombre' => 'Licenciatura'],
         )->create();
     }
 }

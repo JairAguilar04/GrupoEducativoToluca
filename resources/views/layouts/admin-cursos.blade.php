@@ -50,7 +50,7 @@
             @endif
 
             <div class="flex">
-                <div x-show="menu" class="sm:w-72 sm:flex hidden bg-gray-300 h-screen">
+                <div x-show="menu" class="sm:w-72 sm:flex hidden sm:h-screen">
                     <livewire:layout.nav-menu />
                 </div>
 
